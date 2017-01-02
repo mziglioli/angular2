@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/core/theming/all-theme';
+@include md-core();
+$primary: md-palette($md-teal, 800);
+$accent:  md-palette($md-orange, 600, A100, A400);
+$warn:    md-palette($md-red, 600);
+$theme: md-light-theme($primary, $accent, $warn);
+@include angular-material-theme($theme);
+.form-error {
+  	color: red;
+}
+.my-content{
+	padding:10%;
+}

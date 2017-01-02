@@ -1,0 +1,15 @@
+<p>article works!</p>
+  
+  <br>
+  <input (keyup)='myInputKeyPress($event)'>
+  
+  <br>
+  <p>{{myText}}</p>
+  
+  <br>
+  
+<ul>
+	<li *ngFor="let cat of categories">
+    	{{ cat.id }}, {{cat.name}}
+  	</li>
+</ul>
