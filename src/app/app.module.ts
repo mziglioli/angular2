@@ -8,7 +8,6 @@ import 'hammerjs';
 
 //CONF
 import { MyBrowserXhr } from 'app/conf/MyBrowserXhr';
-import { MyRequest } from 'app/conf/MyRequest';
 import { AuthGuard } from 'app/conf/AuthGuard';
 
 //COMPONENTS
@@ -28,9 +27,11 @@ import { ArticleService } from 'app/service/article.service';
 import { CategoryService } from 'app/service/category.service';
 import { TestService } from 'app/service/test.service';
 import { PublicService } from 'app/service/public.service';
+import { DialogsConfirmService } from 'app/service/dialog-confirm.service';
 
 //SESSION
 import { LocalStorageModule } from 'angular-2-local-storage';
+import { DialogConfirmComponent } from './component/dialog-confirm/dialog-confirm.component';
 
 @NgModule( {
     declarations: [
@@ -43,6 +44,7 @@ import { LocalStorageModule } from 'angular-2-local-storage';
         LoginComponent,
         CategoryCreateComponent,
         HomeComponent,
+        DialogConfirmComponent,
     ],
     imports: [
         BrowserModule,
@@ -62,7 +64,10 @@ import { LocalStorageModule } from 'angular-2-local-storage';
         TestService,
         PublicService,
         { provide: BrowserXhr, useClass: MyBrowserXhr },
-        //        { provide: RequestOptions, useClass: MyRequest },
+        DialogsConfirmService,
+    ],
+    entryComponents: [
+        DialogConfirmComponent,
     ],
     bootstrap: [AppComponent]
 

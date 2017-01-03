@@ -31,7 +31,6 @@ export class StaticUrl {
     public static get CATEGORY_BY_ID(): string { return this.CATEGORY + this.FIND_BY_ID;}
     public static get CATEGORY_SAVE(): string { return this.CATEGORY + this.SAVE;}
     
-    
     // TEST
 
     // URI
@@ -40,7 +39,7 @@ export class StaticUrl {
     //ROUTER
     public static get ROUTER_HOME(): string { return "home";}
     public static get ROUTER_CATEGORY(): string { return "category";}
-    public static get ROUTER_LOGIN(): string { return "login";}
+    public static get ROUTER_LOGIN(): string { return "/login";}
     public static get ROUTER_NEW(): string { return "new";}
     
 }

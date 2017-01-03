@@ -3,11 +3,12 @@ import { Http, Response,Headers,RequestOptionsArgs,RequestOptions,RequestMethod,
 import { Category } from 'app/model/category';
 import { Observable } from 'rxjs/Rx';
 import { LocalStorageService } from 'angular-2-local-storage';
-// Import RxJs required methods
+
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import { StaticUrl } from 'app/util/staticurl'; 
+import { MyHeader } from 'app/util/MyHeader'; 
 
 @Injectable()
 export class CategoryService {
@@ -29,10 +30,7 @@ export class CategoryService {
     }
     
     save( category: Category ): Observable<Category> {
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('Accept', 'application/json');
-
+        let headers = MyHeader.HeaderDefault;
         var requestoptions = new RequestOptions({
             method: RequestMethod.Post,
             url: StaticUrl.CATEGORY_SAVE,
@@ -40,6 +38,25 @@ export class CategoryService {
             body: JSON.stringify(category)
         })
         return this.http.request(new Request(requestoptions))
+        .map((res:Response) => res)
+        .catch((error:any) => Observable.throw(error.json() || 'Server error'));
+    }
+    
+    update( category: Category, id: number ): Observable<Category> {
+        let headers = MyHeader.HeaderDefault;
+        var requestoptions = new RequestOptions({
+            method: RequestMethod.Put,
+            url: StaticUrl.CATEGORY_SAVE+id,
+            headers: headers,
+            body: JSON.stringify(category)
+        })
+        return this.http.request(new Request(requestoptions))
+        .map((res:Response) => res)
+        .catch((error:any) => Observable.throw(error.json() || 'Server error'));
+    }
+    
+    deleted( id: number ) {
+        return this.http.delete(StaticUrl.CATEGORY_SAVE+id)
         .map((res:Response) => res)
         .catch((error:any) => Observable.throw(error.json() || 'Server error'));
     }
