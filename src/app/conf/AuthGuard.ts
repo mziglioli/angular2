@@ -4,6 +4,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angul
 import { LocalStorageService } from 'angular-2-local-storage';
 import { Observable } from 'rxjs/Observable';
 import { User } from 'app/model/user';
+import { StaticUrl } from 'app/util/staticurl'; 
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -15,7 +16,7 @@ export class AuthGuard implements CanActivate {
     canActivate() {
         let sessionUser = localStorage.getItem( 'userLogged' );
         if ( sessionUser == null || sessionUser == "null" || sessionUser == "undefined" ) {
-            this.router.navigate( ['/login'] );
+            this.router.navigate( [StaticUrl.ROUTER_LOGIN] );
             return false;
         }
 
