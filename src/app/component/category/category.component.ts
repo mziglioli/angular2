@@ -4,6 +4,7 @@ import { Category } from 'app/model/category';
 import { CategoryService } from 'app/service/category.service';
 import { DialogsConfirmService } from 'app/service/dialog-confirm.service';
 import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
+import { SnackBarProvider } from 'app/providers/snackbar.provider';
 
 @Component( {
     selector: 'app-category',
@@ -19,11 +20,16 @@ export class CategoryComponent implements OnInit {
     constructor( private service: CategoryService, 
                  private dialog: DialogsConfirmService, 
                  private viewContainerRef: ViewContainerRef, 
-                 private snackbar: MdSnackBar) {
+                 private snackbar: MdSnackBar,
+                 private snackbarProvider: SnackBarProvider) {
         this.getAllCategories();
     }
 
     ngOnInit() {
+        var t = this.snackbarProvider.title;
+        if(t != null && t != "null"){
+            this.showSnack(t, this.snackbarProvider.message);
+        }
     }
 
     getAllCategories() {
@@ -59,5 +65,5 @@ export class CategoryComponent implements OnInit {
         config.duration = 2000; 
         config.viewContainerRef = this.viewContainerRef; 
         this.snackbar.open(title, msg, config); 
-      }
+    }
 }

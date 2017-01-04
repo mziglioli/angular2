@@ -33,6 +33,9 @@ import { DialogsConfirmService } from 'app/service/dialog-confirm.service';
 import { LocalStorageModule } from 'angular-2-local-storage';
 import { DialogConfirmComponent } from './component/dialog-confirm/dialog-confirm.component';
 
+//PROVIDERS
+import { SnackBarProvider } from 'app/providers/snackbar.provider';
+
 @NgModule( {
     declarations: [
         AppComponent,
@@ -65,6 +68,7 @@ import { DialogConfirmComponent } from './component/dialog-confirm/dialog-confir
         PublicService,
         { provide: BrowserXhr, useClass: MyBrowserXhr },
         DialogsConfirmService,
+        SnackBarProvider
     ],
     entryComponents: [
         DialogConfirmComponent,

@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Category } from 'app/model/category';
 import { CategoryService } from 'app/service/category.service';
 import { StaticUrl } from 'app/util/staticurl'; 
+import { SnackBarProvider } from 'app/providers/snackbar.provider';
 
 @Component( {
     selector: 'app-category-create',
@@ -19,7 +20,7 @@ export class CategoryCreateComponent implements OnInit {
     action:string;
     title:string;
 
-    constructor( private router: Router, private service: CategoryService, private activatedRoute: ActivatedRoute ) {
+    constructor( private router: Router, private service: CategoryService, private activatedRoute: ActivatedRoute, private snackbarProvider: SnackBarProvider ) {
 
     }
 
@@ -88,6 +89,9 @@ export class CategoryCreateComponent implements OnInit {
         .subscribe(
             result => {
                 console.log( "updated: " + result );
+                this.snackbarProvider.title = "Success";
+                this.snackbarProvider.message = "Category updated";
+                this.snackbarProvider.style = "info";
                 this.router.navigate( [StaticUrl.ROUTER_CATEGORY] );
             },
             error => {
@@ -101,6 +105,9 @@ export class CategoryCreateComponent implements OnInit {
         .subscribe(
             result => {
                 console.log( "saved: " + result );
+                this.snackbarProvider.title = "Success";
+                this.snackbarProvider.message = "Category saved";
+                this.snackbarProvider.style = "info";
                 this.router.navigate( [StaticUrl.ROUTER_CATEGORY] );
             },
             error => {
