@@ -1,10 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule, RequestOptions, XHRBackend, BrowserXhr } from '@angular/http';
+import { HttpModule, RequestOptions, XHRBackend, BrowserXhr, Http} from '@angular/http';
 import { routes } from './app.router';
 import { MaterialModule } from '@angular/material';
 import 'hammerjs';
+
+// TRANSLATION
+import {TranslateModule, TranslateStaticLoader, TranslateLoader} from 'ng2-translate';
 
 //CONF
 import { MyBrowserXhr } from 'app/conf/MyBrowserXhr';
@@ -36,6 +39,10 @@ import { DialogConfirmComponent } from './component/dialog-confirm/dialog-confir
 //PROVIDERS
 import { SnackBarProvider } from 'app/providers/snackbar.provider';
 
+export function createTranslateLoader(http: Http) {
+    return new TranslateStaticLoader(http, './assets/i18n', '.json');
+}
+
 @NgModule( {
     declarations: [
         AppComponent,
@@ -57,6 +64,11 @@ import { SnackBarProvider } from 'app/providers/snackbar.provider';
         LocalStorageModule.withConfig( {
             prefix: 'app-root',
             storageType: 'localStorage'
+        }),
+        TranslateModule.forRoot({
+            provide: TranslateLoader,
+            useFactory: (createTranslateLoader),
+            deps: [Http]
         }),
         MaterialModule.forRoot()
     ],

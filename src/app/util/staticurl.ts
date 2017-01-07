@@ -10,6 +10,7 @@ export class StaticUrl {
     public static get PUBLIC(): string { return "/public";}
     public static get LOGIN(): string { return this.SERVER + "/public/login";}
     public static get LOGOUT(): string { return this.SERVER +"/public/logout";}
+    public static get LOGGED(): string { return this.SERVER + "/user/logged";}
 
     // CRUD
     public static get FIND_BY_ID(): string { return "/{id}";}

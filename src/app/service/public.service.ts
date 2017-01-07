@@ -9,8 +9,6 @@ import { User } from 'app/model/user';
 
 @Injectable()
 export class PublicService {
-    public token: string;
-
     constructor( private http: Http) {}
     
     login( loginForm: LoginForm ): Observable<any> {
@@ -23,6 +21,20 @@ export class PublicService {
 
     logout(): Observable<any> {
         return this.http.get( StaticUrl.LOGOUT)
+        .map((res:Response) => res)
+        .catch((error:any) => Observable.throw(error.json() || 'Server error'));
+    }
+    
+    userLogged() {
+        return this.http.get( StaticUrl.LOGGED)
+//        .subscribe(
+//                res => {
+//                    res.json();
+//                },
+//                error => {
+//                    error;
+//                }        
+//        );
         .map((res:Response) => res)
         .catch((error:any) => Observable.throw(error.json() || 'Server error'));
     }

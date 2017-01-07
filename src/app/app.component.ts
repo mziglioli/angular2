@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {TranslateService} from 'ng2-translate';
 
 @Component({
   selector: 'app-root',
@@ -7,37 +8,16 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
-   //FIXME remove test only
     title: string;
-    someProperty = true;
-    anotherProperty = true;
-    
-    constructor() {
-        
+
+    constructor(translate: TranslateService) {
+        // this language will be used as a fallback when a translation isn't found in the current language
+        translate.setDefaultLang('en');
+         // the lang to use, if the lang isn't available, it will use the current loader to get them
+        translate.use('en');
     }
     
     ngOnInit(){
         this.title = 'Title';
     }
-    
-    setClasses(){
-        let classes = {
-                extraclass: this.someProperty,
-                anotherclass: this.anotherProperty
-        };
-        return classes;
-    }
-    
-    changeColor(){
-        this.anotherProperty = !this.anotherProperty;
-    }
-    
-    setStyles(){
-        let styles = {
-            'font-style' : this.someProperty ? 'italic' : 'normal',
-            'background' : this.anotherProperty ? 'black' : 'green'
-        };
-        return styles;
-    }
-
 }

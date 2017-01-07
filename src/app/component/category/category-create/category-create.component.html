@@ -2,7 +2,7 @@
 
 <a [routerLink]="['/category']" title="Back">
 	<i class="material-icons" >keyboard_backspace</i>
-	Back
+	{{ 'label.back' | translate }}
 </a>
 
 <md-card class="app-input-section" >
@@ -14,24 +14,24 @@
 	<form name="form" (ngSubmit)="f.form.valid && submit()" #f="ngForm" novalidate>
 		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
 	    	<md-input-container style="width: 100%">
-	    		<input md-input placeholder="Name" maxlength="250" type="text" name="name" [(ngModel)]="category.name" #name="ngModel" required>
+	    		<input md-input placeholder="{{ 'label.name' | translate }}" maxlength="250" type="text" name="name" [(ngModel)]="category.name" #name="ngModel" required>
         		<span md-prefix>
           			<i class="material-icons app-input-icon">add_circle</i>&nbsp;
         		</span>
       		</md-input-container>
-            <div role="alert" md-label *ngIf="f.submitted && !name.valid" class="form-error" >Name is required</div>
+            <div role="alert" md-label *ngIf="f.submitted && !name.valid" class="form-error" >{{ 'error.required.name' | translate }}</div>
         </div>
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !icon.valid }">
       		<md-input-container style="width: 100%">
-	    		<input md-input placeholder="Icon" maxlength="50" type="text" name="icon" [(ngModel)]="category.icon" #icon="ngModel" required> 
+	    		<input md-input placeholder="{{ 'label.icon' | translate }}" maxlength="50" type="text" name="icon" [(ngModel)]="category.icon" #icon="ngModel" required> 
 	          	<span md-prefix>
           			<i class="material-icons app-input-icon">accessibility</i>&nbsp;
         		</span>
       		</md-input-container>
-			<div *ngIf="f.submitted && !icon.valid" class="form-error">Icon is required</div>
+			<div *ngIf="f.submitted && !icon.valid" class="form-error">{{ 'error.required.icon' | translate }}</div>
         </div>
 		<div class="form-group">
-			<button md-raised-button color="accent" type="reset">Clear</button>
+			<button md-raised-button color="accent" type="reset">{{ 'label.clear' | translate }}</button>
 			<button md-raised-button color="primary" type="submit">{{action}}</button> 
 		</div>
         <div *ngIf="error" class="form-error" style="width: 100%">

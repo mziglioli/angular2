@@ -1,0 +1,35 @@
+{
+	"label.title": "App Title",
+	"label.login": "Login",
+	"label.logout": "Logout",
+    "label.welcome": "Welcome",
+    "label.categories": "Categories",
+    "label.articles": "Articles",
+    "label.words": "Words",
+    
+    "label.username": "Username",
+    "label.password": "Password",
+    "label.clear": "Clear",
+    "label.go": "Go",
+    "label.back": "Back",
+    
+    "label.home": "This is the home page",
+    "label.id": "Id",
+    "label.name": "Name",
+    "label.icon": "Icon",
+    "label.edit": "Edit",
+    "label.delete": "Delete",
+    "label.dialog.confirm": "Confirm Dialog",
+    "label.dialog.delete": "Are you sure you want to delete {{value}} ?",
+    "label.success": "Success",
+    "label.error": "Error",
+    "label.deleted.category": "Category deleted",
+    "label.ok": "Ok",
+    "label.cancel": "Cancel",
+    
+    "error.notvalid.username": "Username not valid",
+    "error.notvalid.password": "Password not valid",
+    "error.required.name": "Name required",
+    "error.required.icon": "Icon required"
+    
+}

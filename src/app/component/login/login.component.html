@@ -1,30 +1,30 @@
 <div class="my-login">
 <md-card class="app-input-section" >
 	<md-card-header color="primary">
-    	<md-card-title><label class="my-title">Login</label></md-card-title>
+    	<md-card-title><label class="my-title">{{ 'label.login' | translate }}</label></md-card-title>
   	</md-card-header>
 	<form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
 		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
 	    	<md-input-container style="width: 100%">
-	    		<input md-input placeholder="Username" maxlength="250" type="email" name="username" [(ngModel)]="loginForm.username" #username="ngModel" required pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}">
+	    		<input md-input placeholder="{{ 'label.username' | translate }}" maxlength="250" type="email" name="username" [(ngModel)]="loginForm.username" #username="ngModel" required pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}">
         		<span md-prefix>
           			<i class="material-icons app-input-icon">person</i>&nbsp;
         		</span>
       		</md-input-container>
-            <div role="alert" md-label *ngIf="f.submitted && !username.valid" class="form-error" >Username not valid</div>
+            <div role="alert" md-label *ngIf="f.submitted && !username.valid" class="form-error" >{{ 'error.notvalid.username' | translate }}</div>
         </div>
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
       		<md-input-container style="width: 100%">
-	    		<input md-input placeholder="Password" maxlength="50" type="text" name="password" [(ngModel)]="loginForm.password" #password="ngModel" required> 
+	    		<input md-input placeholder="{{ 'label.password' | translate }}" maxlength="50" type="text" name="password" [(ngModel)]="loginForm.password" #password="ngModel" required> 
 	          	<span md-prefix>
           			<i class="material-icons app-input-icon">lock</i>&nbsp;
         		</span>
       		</md-input-container>
-			<div *ngIf="f.submitted && !password.valid" class="form-error">Password not valid</div>
+			<div *ngIf="f.submitted && !password.valid" class="form-error">{{ 'error.notvalid.password' | translate }}</div>
         </div>
 		<div class="form-group">
-			<button md-raised-button color="accent" type="reset">Clear</button>
-			<button md-raised-button color="primary" type="submit">Login</button>
+			<button md-raised-button color="accent" type="reset">{{ 'label.clear' | translate }}</button>
+			<button md-raised-button color="primary" type="submit">{{ 'label.go' | translate }}</button>
 		</div>
         <div *ngIf="error" class="form-error" style="width: 100%">
 		    	{{error}}
