@@ -67,7 +67,7 @@
 	  	</ul>
 	</div>
 	<div style="padding-top: 2%" class="dataTables_filter" id="example_info" role="status" aria-live="polite">
-		Showing 1 to {{pageCategory.numberOfElements}} of {{pageCategory.totalElements}} entries
+		Showing {{(pageCategory.number * pageCategory.size) + 1}} to {{(pageCategory.number * pageCategory.size) + pageCategory.numberOfElements}} of {{pageCategory.totalElements}} entries
 	</div>
 </div>
 <router-outlet></router-outlet>
