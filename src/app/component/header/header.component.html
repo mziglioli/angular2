@@ -8,15 +8,17 @@
 		   		<md-icon>more_vert</md-icon>
 			</button>
 			<md-menu #menu="mdMenu">
-		  		<button md-menu-item routerLink="category">
-		    		<md-icon>add_circle</md-icon>
-		    		<span> {{ 'label.categories' | translate }} </span>
-		  		</button>
-			  	<button md-menu-item disabled>
+				<template [ngIf]="isAdmin()">
+			  		<button md-menu-item routerLink="category">
+			    		<md-icon>add_circle</md-icon>
+			    		<span> {{ 'label.categories' | translate }} </span>
+			  		</button>
+		  		</template>
+			  	<button md-menu-item routerLink="home">
 			    	<md-icon> voicemail </md-icon>
 			    	<span> {{ 'label.articles' | translate }} </span>
 			  	</button>
-			  	<button md-menu-item>
+			  	<button md-menu-item disabled>
 			    	<md-icon> notifications_off </md-icon>
 			    	<span> {{ 'label.words' | translate }} </span>
 			  	</button>

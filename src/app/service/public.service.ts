@@ -16,7 +16,7 @@ export class PublicService {
         
         return this.http.post( StaticUrl.LOGIN ,JSON.stringify(loginForm))
         .map((res:Response) => res)
-        .catch((error:any) => Observable.throw(error.json() || 'Server error'));
+        .catch((error:any) => Observable.throw(error || 'Server error'));
     }
 
     logout(): Observable<any> {
@@ -27,14 +27,6 @@ export class PublicService {
     
     userLogged() {
         return this.http.get( StaticUrl.LOGGED)
-//        .subscribe(
-//                res => {
-//                    res.json();
-//                },
-//                error => {
-//                    error;
-//                }        
-//        );
         .map((res:Response) => res)
         .catch((error:any) => Observable.throw(error.json() || 'Server error'));
     }

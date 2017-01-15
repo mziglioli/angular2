@@ -1,31 +1,73 @@
 <div class="my-content">
-<button md-raised-button color="primary" type="button" [routerLink]="['new']">New</button>
-<label class="my-title">{{ 'label.categories' | translate }}</label>
-<table class="table table-hover">
-	<thead>
-		<tr>
-			<th>{{ 'label.id' | translate }}</th>
-			<th>{{ 'label.name' | translate }}</th>
-			<th>{{ 'label.edit' | translate }}</th>
-			<th>{{ 'label.delete' | translate }}</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr *ngFor="let cat of categories">
-			<td>{{ cat.id }}</td>
-			<td>{{cat.name}}</td>
-			<td>
-				<a [routerLink]="['edit', cat.id]">
-          			<i  class="material-icons app-input-icon">edit</i>&nbsp;
-				</a>
-			</td>
-			<td>
-				<a (click)="openDialog(cat)" href="javascript:void(0)"> 
-          			<i  class="material-icons app-input-icon">delete</i>&nbsp;
-				</a>
-			</td>
-		</tr>
-	</tbody>
-</table>
+	<div class="row">
+		<div class="col-md-4">
+			<button md-raised-button color="primary" type="button" [routerLink]="['new']">New</button>
+			<label class="my-title">{{ 'label.categories' | translate }}</label>
+	  	</div>
+	</div>
+	<div style="padding-top: 3%;padding-bottom: 3%">
+		<div class="dataTables_length" id="example_length">
+			<label>Show
+				<select name="example_length" aria-controls="example" class="">
+					<option value="5">5</option>
+					<option value="10">10</option>
+					<option value="50">50</option>
+				</select> entries
+			</label>
+		</div>
+		<div id="example_filter" class="dataTables_filter">
+			<label>Search:
+				<input type="search" class="" placeholder="" aria-controls="example">
+			</label>
+		</div>
+	</div>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>{{ 'label.id' | translate }}</th>
+				<th>{{ 'label.name' | translate }}</th>
+				<th>{{ 'label.edit' | translate }}</th>
+				<th>{{ 'label.delete' | translate }}</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let cat of pageCategory.content">
+				<td>{{ cat.id }}</td>
+				<td>{{cat.name}}</td>
+				<td>
+					<a [routerLink]="['edit', cat.id]">
+	          			<i  class="material-icons app-input-icon">edit</i>&nbsp;
+					</a>
+				</td>
+				<td>
+					<a (click)="openDialog(cat)" href="javascript:void(0)"> 
+	          			<i  class="material-icons app-input-icon">delete</i>&nbsp;
+					</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="dataTables_length">
+		<ul class="dataTables_filter pagination pagination-sm">
+		    <li [ngClass]="{disabled: pageCategory.first}" class="pagination-first page-item">
+	    		<a class="page-link" href="javascript:void(0)" (click)="change(0)">First</a>
+	    	</li>
+		    <li [ngClass]="{disabled: pageCategory.first}" class="pagination-prev page-item disabled">
+	      		<a class="page-link" href="javascript:void(0)" (click)="change(pageCategory.number-1)">Previous</a>
+	      	</li>
+			<li [ngClass]="{active: item == (pageCategory.number+1)}"  *ngFor="let item of items" class="pagination-page page-item">
+				<a class="page-link" href="javascript:void(0)">{{item}}</a>
+			</li>
+	    	<li [ngClass]="{disabled: pageCategory.last}" class="pagination-next page-item">
+	      		<a class="page-link" href="javascript:void(0)" (click)="change(pageCategory.number+1)">Next</a>
+	      	</li>
+	    	<li [ngClass]="{disabled: pageCategory.last}" class="pagination-last page-item">
+	     		<a class="page-link" href="javascript:void(0)" (click)="change(pageCategory.totalPages-1)">Last</a>
+	    	</li>
+	  	</ul>
+	</div>
+	<div style="padding-top: 2%" class="dataTables_filter" id="example_info" role="status" aria-live="polite">
+		Showing 1 to {{pageCategory.numberOfElements}} of {{pageCategory.totalElements}} entries
+	</div>
 </div>
 <router-outlet></router-outlet>

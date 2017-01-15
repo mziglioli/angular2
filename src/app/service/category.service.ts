@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response,Headers,RequestOptionsArgs,RequestOptions,RequestMethod,Request } from '@angular/http';
 import { Category } from 'app/model/category';
+import { PageCategory } from 'app/model/page/page.category';
+
 import { Observable } from 'rxjs/Rx';
 import { LocalStorageService } from 'angular-2-local-storage';
 
@@ -13,12 +15,20 @@ import { MyHeader } from 'app/util/MyHeader';
 @Injectable()
 export class CategoryService {
  
+    pageCat : PageCategory;
+    
     constructor( private http: Http, public localStorage: LocalStorageService) {
         //TODO
     }
     
     getAllCategories() : Observable<Category[]>{
         return this.http.get(StaticUrl.CATEGORY_ALL)
+            .map((res:Response) => res.json())
+            .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+    }
+    
+    getPageCategories(search:string, page:number, size:number) : Observable<PageCategory>{
+        return this.http.get(StaticUrl.CATEGORY_PAGE+"search="+search+"&page=" + page + "&size="+ size)
             .map((res:Response) => res.json())
             .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
     }

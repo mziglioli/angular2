@@ -20,6 +20,7 @@ export class StaticUrl {
     public static get DELETE(): string { return "/{id}";}
     public static get EDIT(): string { return "/{id}";}
     public static get NEW(): string { return "/new";}
+    public static get PAGE(): string { return "/page?";}
 
     // SPECIFIC
     public static get SIGNUP(): string { return "/signUp";}
@@ -29,6 +30,7 @@ export class StaticUrl {
     public static get CATEGORY(): string { return this.SERVER +"/category";}
 
     public static get CATEGORY_ALL(): string { return this.CATEGORY + this.FIND_ALL;}
+    public static get CATEGORY_PAGE(): string { return this.CATEGORY + this.PAGE ;}
     public static get CATEGORY_BY_ID(): string { return this.CATEGORY + this.FIND_BY_ID;}
     public static get CATEGORY_SAVE(): string { return this.CATEGORY + this.SAVE;}
     

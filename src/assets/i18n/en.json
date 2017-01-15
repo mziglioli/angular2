@@ -18,18 +18,29 @@
     "label.name": "Name",
     "label.icon": "Icon",
     "label.edit": "Edit",
+    "label.save": "Save",
+    "label.update": "Update",
     "label.delete": "Delete",
     "label.dialog.confirm": "Confirm Dialog",
     "label.dialog.delete": "Are you sure you want to delete {{value}} ?",
     "label.success": "Success",
     "label.error": "Error",
-    "label.deleted.category": "Category deleted",
+    "label.saved.object": "{{value}} saved",
+    "label.updated.object": "{{value}} updated",
+    "label.deleted.object": "{{value}} deleted",
     "label.ok": "Ok",
     "label.cancel": "Cancel",
+    "label.create.new.object": "Create new {{value}}",
+    "label.new.object": "New {{value}}",
+    "label.alter.object": "Alter {{value}}",
+    
+    "warn.no.changes" : "No Changes detected",
     
     "error.notvalid.username": "Username not valid",
     "error.notvalid.password": "Password not valid",
     "error.required.name": "Name required",
-    "error.required.icon": "Icon required"
+    "error.required.icon": "Icon required",
+    "exception.dataIntegrityViolation": "{{value}} already exists",
+    "exception.someErrorOccurred": "Some error occurred"
     
 }

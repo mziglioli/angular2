@@ -5,6 +5,9 @@ import { CategoryService } from 'app/service/category.service';
 import { StaticUrl } from 'app/util/staticurl'; 
 import { SnackBarProvider } from 'app/providers/snackbar.provider';
 
+//TRANSLATION
+import { TranslateService } from 'ng2-translate';
+
 @Component( {
     selector: 'app-category-create',
     templateUrl: './category-create.component.html',
@@ -20,7 +23,7 @@ export class CategoryCreateComponent implements OnInit {
     action:string;
     title:string;
 
-    constructor( private router: Router, private service: CategoryService, private activatedRoute: ActivatedRoute, private snackbarProvider: SnackBarProvider ) {
+    constructor( private router: Router, private service: CategoryService, private activatedRoute: ActivatedRoute, private snackbarProvider: SnackBarProvider,private translate: TranslateService ) {
 
     }
 
@@ -36,8 +39,8 @@ export class CategoryCreateComponent implements OnInit {
             }
         });
         this.category = { id: null, name: '', icon: '' };
-        this.action = "Save";
-        this.title = "Create New Category";
+        this.action = this.myTranslate('label.save', '');
+        this.title = this.myTranslate('label.create.new.object', 'Category');
         if ( this.id != undefined ) {
             this.getCategory( this.id );
         }
@@ -49,8 +52,8 @@ export class CategoryCreateComponent implements OnInit {
             category => {
                 this.category = category;
                 this.categoryAux = Object.assign({}, category);
-                this.action = "Update";
-                this.title = "Alter Category";
+                this.action = this.myTranslate('label.update', '');
+                this.title = this.myTranslate('label.alter.object', 'Category');
             },
             error => this.error = <any>error
             );
@@ -62,7 +65,7 @@ export class CategoryCreateComponent implements OnInit {
         var change = true;
         if(this.categoryAux != null && this.id != undefined){
             if(!this.hasChanged()){
-                this.error = "No Changes detected";
+                this.error = this.myTranslate('warn.no.changes', '');
                 change = false;
             }
         }
@@ -89,8 +92,8 @@ export class CategoryCreateComponent implements OnInit {
         .subscribe(
             result => {
                 console.log( "updated: " + result );
-                this.snackbarProvider.title = "Success";
-                this.snackbarProvider.message = "Category updated";
+                this.snackbarProvider.title = this.myTranslate('label.success', '');
+                this.snackbarProvider.message = this.myTranslate('label.updated.object', 'Category');
                 this.snackbarProvider.style = "info";
                 this.router.navigate( [StaticUrl.ROUTER_CATEGORY] );
             },
@@ -105,8 +108,8 @@ export class CategoryCreateComponent implements OnInit {
         .subscribe(
             result => {
                 console.log( "saved: " + result );
-                this.snackbarProvider.title = "Success";
-                this.snackbarProvider.message = "Category saved";
+                this.snackbarProvider.title = this.myTranslate('label.success', '');
+                this.snackbarProvider.message = this.myTranslate('label.saved.object', 'Category');
                 this.snackbarProvider.style = "info";
                 this.router.navigate( [StaticUrl.ROUTER_CATEGORY] );
             },
@@ -118,11 +121,20 @@ export class CategoryCreateComponent implements OnInit {
     
     private errorHandler(error:any){
         if ( error.error != undefined && error.error != '' ) {
-            this.error = error.error;
+            this.error = this.myTranslate('exception.dataIntegrityViolation', this.category.name);
         } else {
-            //FIXME
-            this.error = 'Some error occurred';
+            this.error = this.myTranslate('exception.someErrorOccurred','');
         }
         console.log( "logincomponent: error->" + error );
     }
+    
+    myTranslate(name:string, args:string): string {
+        var subject:string;
+        this.translate.get(name, {value: args}).subscribe(
+             (res: string) => { 
+                 subject = res;
+             }
+         );
+        return subject;
+     };
 }

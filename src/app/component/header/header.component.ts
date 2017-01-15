@@ -31,6 +31,16 @@ export class HeaderComponent implements OnInit {
         return false;
     }
     
+    isAdmin(){
+        if(this.user != null){
+            var obj = this.user.roles.filter(r => r == 'ADMIN')[0];
+            if(obj){
+                return true;
+            }
+            return false;
+        }
+    }
+    
     logout(){
         console.log( 'logout' );
         this.error = '',
