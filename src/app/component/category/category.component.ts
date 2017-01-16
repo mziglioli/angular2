@@ -68,16 +68,16 @@ export class CategoryComponent implements OnInit {
     }
     
     changeSize(event){
-        this.getPageCategories(this.pageCategory.number);
+        this.getPageCategories(0);
     }
     
     changeSort(event){
-        this.getPageCategories(this.pageCategory.number);
+        this.getPageCategories(0);
     }
     
     changeSearch(event){
         this.search = event;
-        this.getPageCategories(this.pageCategory.number);
+        this.getPageCategories(0);
     }
 
     getPageCategories(thisPage:number) {
