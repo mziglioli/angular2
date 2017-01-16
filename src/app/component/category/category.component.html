@@ -6,18 +6,27 @@
 	  	</div>
 	</div>
 	<div style="padding-top: 3%;padding-bottom: 3%">
-		<div class="dataTables_length" id="example_length">
+		<div id="table-size" class="dataTables_length">
 			<label>Show
-				<select name="example_length" aria-controls="example" class="">
-					<option value="5">5</option>
-					<option value="10">10</option>
-					<option value="50">50</option>
+				<select name="table-size-select" [(ngModel)]="pageCategory.size" (ngModelChange)="changeSize($event)">
+					<option value="5"  [selected]="pageCategory.size == 5">5</option>
+					<option value="10" [selected]="pageCategory.size == 10">10</option>
+					<option value="20" [selected]="pageCategory.size == 15">20</option>
 				</select> entries
 			</label>
 		</div>
-		<div id="example_filter" class="dataTables_filter">
+		<div id="table-sort" class="dataTables_filter" style="padding-left:3%">
+			<label>Sort: 
+				<select name="table-sort-select" [(ngModel)]="sort" (ngModelChange)="changeSort($event)">
+					<option value="id"   [selected]="sort == 'id'">Id</option>
+					<option value="name" [selected]="sort == 'name'">Name</option>
+					<option value="icon" [selected]="sort == 'icon'">Icon</option>
+				</select>
+			</label>
+		</div>
+		<div id="table-filter" class="dataTables_filter">
 			<label>Search:
-				<input type="search" class="" placeholder="" aria-controls="example">
+				<input type="text" placeholder="Search" [ngModel]="search" (ngModelChange)="changeSearch($event)">
 			</label>
 		</div>
 	</div>
@@ -26,14 +35,16 @@
 			<tr>
 				<th>{{ 'label.id' | translate }}</th>
 				<th>{{ 'label.name' | translate }}</th>
+				<th>{{ 'label.icon' | translate }}</th>
 				<th>{{ 'label.edit' | translate }}</th>
 				<th>{{ 'label.delete' | translate }}</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr *ngFor="let cat of pageCategory.content">
-				<td>{{ cat.id }}</td>
+				<td>{{cat.id}}</td>
 				<td>{{cat.name}}</td>
+				<td>{{cat.icon}}</td>
 				<td>
 					<a [routerLink]="['edit', cat.id]">
 	          			<i  class="material-icons app-input-icon">edit</i>&nbsp;
@@ -56,7 +67,7 @@
 	      		<a class="page-link" href="javascript:void(0)" (click)="change(pageCategory.number-1)">Previous</a>
 	      	</li>
 			<li [ngClass]="{active: item == (pageCategory.number+1)}"  *ngFor="let item of items" class="pagination-page page-item">
-				<a class="page-link" href="javascript:void(0)">{{item}}</a>
+				<a class="page-link" href="javascript:void(0)" (click)="change(item-1)">{{item}}</a>
 			</li>
 	    	<li [ngClass]="{disabled: pageCategory.last}" class="pagination-next page-item">
 	      		<a class="page-link" href="javascript:void(0)" (click)="change(pageCategory.number+1)">Next</a>

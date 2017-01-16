@@ -27,6 +27,7 @@ export class CategoryComponent implements OnInit {
     errorMessage: string;
     dialogResult: any;
     search: string;
+    sort: string;
 
     constructor( private service: CategoryService,
         private dialog: DialogsConfirmService,
@@ -34,10 +35,11 @@ export class CategoryComponent implements OnInit {
         private snackbar: MdSnackBar,
         private snackbarProvider: SnackBarProvider,
         private translate: TranslateService ) {
+        this.sort = 'id';
     }
 
     ngOnInit() {
-        this.pageCategory = { content: [], first: true, last: false, number: 0, numberOfElements: 5, size: 5, sort: null, totalElements: 5, totalPages: 0 };
+        this.pageCategory = { content: [], first: true, last: false, number: 0, numberOfElements: 5, size: 5, sort:null, totalElements: 5, totalPages: 0 };
         this.search = '';
         this.change(0);
         var t = this.snackbarProvider.title;
@@ -64,9 +66,22 @@ export class CategoryComponent implements OnInit {
     change(next:number){
         this.getPageCategories(next);
     }
+    
+    changeSize(event){
+        this.getPageCategories(this.pageCategory.number);
+    }
+    
+    changeSort(event){
+        this.getPageCategories(this.pageCategory.number);
+    }
+    
+    changeSearch(event){
+        this.search = event;
+        this.getPageCategories(this.pageCategory.number);
+    }
 
     getPageCategories(thisPage:number) {
-        this.service.getPageCategories( this.search, thisPage, this.pageCategory.size )
+        this.service.getPageCategories( this.search, thisPage, this.pageCategory.size, this.sort)
             .subscribe(
             res => {
                 this.pageCategory = res;

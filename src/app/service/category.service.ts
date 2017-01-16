@@ -27,8 +27,8 @@ export class CategoryService {
             .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
     }
     
-    getPageCategories(search:string, page:number, size:number) : Observable<PageCategory>{
-        return this.http.get(StaticUrl.CATEGORY_PAGE+"search="+search+"&page=" + page + "&size="+ size)
+    getPageCategories(search:string, page:number, size:number, sort:string) : Observable<PageCategory>{
+        return this.http.get(StaticUrl.CATEGORY_PAGE+"search="+search+"&page=" + page + "&size="+ size + "&sort=" + sort)
             .map((res:Response) => res.json())
             .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
     }
