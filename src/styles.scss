@@ -12,3 +12,9 @@ $theme: md-light-theme($primary, $accent, $warn);
 .my-content{
 	padding:10%;
 }
+.hide{
+	display:none;	
+}
+.show{
+	display:block;
+}

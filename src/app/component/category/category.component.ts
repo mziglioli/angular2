@@ -28,6 +28,7 @@ export class CategoryComponent implements OnInit {
     dialogResult: any;
     search: string;
     sort: string;
+    sortDir: string;
 
     constructor( private service: CategoryService,
         private dialog: DialogsConfirmService,
@@ -42,6 +43,7 @@ export class CategoryComponent implements OnInit {
         this.pageCategory = { content: [], first: true, last: false, number: 0, numberOfElements: 5, size: 5, sort:null, totalElements: 5, totalPages: 0 };
         this.search = '';
         this.change(0);
+        this.sortDir = "expand_more";
         var t = this.snackbarProvider.title;
         if ( t != null && t != "null" ) {
             this.showSnack( t, this.snackbarProvider.message );
@@ -71,17 +73,32 @@ export class CategoryComponent implements OnInit {
         this.getPageCategories(0);
     }
     
-    changeSort(event){
-        this.getPageCategories(0);
-    }
-    
     changeSearch(event){
         this.search = event;
         this.getPageCategories(0);
     }
+    
+    changeSortDir(){
+        if(this.sortDir == "expand_more"){
+            this.sortDir = "expand_less";
+        }else{
+            this.sortDir = "expand_more";
+        }
+        this.getPageCategories(0);
+    }
+    
+    changeSort(event){
+        this.sortDir = "expand_more";
+        this.sort = event;
+        this.getPageCategories(0);
+    }
 
     getPageCategories(thisPage:number) {
-        this.service.getPageCategories( this.search, thisPage, this.pageCategory.size, this.sort)
+        var direction = ',asc';
+        if(this.sortDir == "expand_less"){
+            direction = ',desc';
+        }
+        this.service.getPageCategories( this.search, thisPage, this.pageCategory.size, this.sort+direction)
             .subscribe(
             res => {
                 this.pageCategory = res;

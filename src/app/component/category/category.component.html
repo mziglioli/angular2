@@ -15,15 +15,15 @@
 				</select> entries
 			</label>
 		</div>
-		<div id="table-sort" class="dataTables_filter" style="padding-left:3%">
-			<label>Sort: 
-				<select name="table-sort-select" [(ngModel)]="sort" (ngModelChange)="changeSort($event)">
-					<option value="id"   [selected]="sort == 'id'">Id</option>
-					<option value="name" [selected]="sort == 'name'">Name</option>
-					<option value="icon" [selected]="sort == 'icon'">Icon</option>
-				</select>
-			</label>
-		</div>
+<!-- 		<div id="table-sort" class="dataTables_filter" style="padding-left:3%"> -->
+<!-- 			<label>Sort:  -->
+<!-- 				<select name="table-sort-select" [(ngModel)]="sort" (ngModelChange)="changeSort($event)"> -->
+<!-- 					<option value="id"   [selected]="sort == 'id'">Id</option> -->
+<!-- 					<option value="name" [selected]="sort == 'name'">Name</option> -->
+<!-- 					<option value="icon" [selected]="sort == 'icon'">Icon</option> -->
+<!-- 				</select> -->
+<!-- 			</label> -->
+<!-- 		</div> -->
 		<div id="table-filter" class="dataTables_filter">
 			<label>Search:
 				<input type="text" placeholder="Search" [ngModel]="search" (ngModelChange)="changeSearch($event)">
@@ -33,9 +33,29 @@
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th>{{ 'label.id' | translate }}</th>
-				<th>{{ 'label.name' | translate }}</th>
-				<th>{{ 'label.icon' | translate }}</th>
+				<th>
+					<div class="col-sm-2" style="padding-left: 0;">
+						<a href="javascript:void(0)" (click)="changeSort('id')">{{ 'label.id' | translate }}</a>
+					</div>
+					<a href="javascript:void(0)" (click)="changeSortDir()">
+						<i [ngClass]="{hide: sort != 'id'}" class="material-icons app-input-icon">{{sortDir}}</i>
+					</a>
+				</th>
+				<th>
+					<div class="col-sm-2" style="padding-left: 0;">
+						<a href="javascript:void(0)" (click)="changeSort('name')">{{ 'label.name' | translate }}</a>
+					</div>
+					<a href="javascript:void(0)" (click)="changeSortDir()">
+						<i [ngClass]="{hide: sort != 'name'}" class="material-icons app-input-icon hide" style="padding-left: 4%">{{sortDir}}</i>
+					</a>
+				<th>
+					<div class="col-sm-2" style="padding-left: 4;">
+						<a href="javascript:void(0)" (click)="changeSort('icon')">{{ 'label.icon' | translate }}</a>
+					</div>
+					<a href="javascript:void(0)" (click)="changeSortDir()">
+						<i [ngClass]="{hide: sort != 'icon'}" class="material-icons app-input-icon hide" style="padding-left: 4%">{{sortDir}}</i>
+					</a>
+				</th>
 				<th>{{ 'label.edit' | translate }}</th>
 				<th>{{ 'label.delete' | translate }}</th>
 			</tr>
