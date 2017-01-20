@@ -30,14 +30,18 @@ import { ArticleService } from 'app/service/article.service';
 import { CategoryService } from 'app/service/category.service';
 import { TestService } from 'app/service/test.service';
 import { PublicService } from 'app/service/public.service';
-import { DialogsConfirmService } from 'app/service/dialog-confirm.service';
 
 //SESSION
 import { LocalStorageModule } from 'angular-2-local-storage';
-import { DialogConfirmComponent } from './component/dialog-confirm/dialog-confirm.component';
 
 //PROVIDERS
 import { SnackBarProvider } from 'app/providers/snackbar.provider';
+
+//DIALOG
+import { DialogsConfirmService } from 'app/service/dialog-confirm.service';
+import { DialogConfirmComponent } from './component/dialog-confirm/dialog-confirm.component';
+import { DialogCategoriesComponent } from './component/dialog-categories/dialog-categories.component';
+import { ArticleCreateComponent } from './component/article/article-create/article-create.component';
 
 export function createTranslateLoader(http: Http) {
     return new TranslateStaticLoader(http, './assets/i18n', '.json');
@@ -55,6 +59,8 @@ export function createTranslateLoader(http: Http) {
         CategoryCreateComponent,
         HomeComponent,
         DialogConfirmComponent,
+        DialogCategoriesComponent,
+        ArticleCreateComponent,
     ],
     imports: [
         BrowserModule,
@@ -84,6 +90,7 @@ export function createTranslateLoader(http: Http) {
     ],
     entryComponents: [
         DialogConfirmComponent,
+        DialogCategoriesComponent
     ],
     bootstrap: [AppComponent]
 

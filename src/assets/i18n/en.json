@@ -3,6 +3,8 @@
 	"label.login": "Login",
 	"label.logout": "Logout",
     "label.welcome": "Welcome",
+    "label.category": "Category",
+    "label.article": "Article",
     "label.categories": "Categories",
     "label.articles": "Articles",
     "label.words": "Words",
@@ -33,6 +35,14 @@
     "label.create.new.object": "Create new {{value}}",
     "label.new.object": "New {{value}}",
     "label.alter.object": "Alter {{value}}",
+    "label.delete.object": "Delete {{value}}",
+    "label.article.title":"Title",
+    "label.answer":"Answer",
+    "label.action":"Action",
+    "label.actionName":"Action Name",
+    "label.manage.categories":"Manage Categories",	
+    
+    "label.order.by": "Order by {{value}}",
     
     "warn.no.changes" : "No Changes detected",
     
@@ -40,6 +50,10 @@
     "error.notvalid.password": "Password not valid",
     "error.required.name": "Name required",
     "error.required.icon": "Icon required",
+    "error.required.title":"Title required",
+    "error.required.answer":"Answer required",
+    "error.required.action":"Action required",
+    "error.required.actionName":"Action name required",
     "exception.dataIntegrityViolation": "{{value}} already exists",
     "exception.someErrorOccurred": "Some error occurred"
     

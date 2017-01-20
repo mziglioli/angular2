@@ -28,11 +28,17 @@ export class StaticUrl {
     public static get TEST(): string { return "/test";}
     public static get ADMIN(): string { return "/admin";}
     public static get CATEGORY(): string { return this.SERVER +"/category";}
+    public static get ARTICLE(): string { return this.SERVER +"/article";}
 
     public static get CATEGORY_ALL(): string { return this.CATEGORY + this.FIND_ALL;}
     public static get CATEGORY_PAGE(): string { return this.CATEGORY + this.PAGE ;}
     public static get CATEGORY_BY_ID(): string { return this.CATEGORY + this.FIND_BY_ID;}
     public static get CATEGORY_SAVE(): string { return this.CATEGORY + this.SAVE;}
+    
+    public static get ARTICLE_ALL(): string { return this.ARTICLE + this.FIND_ALL;}
+    public static get ARTICLE_PAGE(): string { return this.ARTICLE + this.PAGE ;}
+    public static get ARTICLE_BY_ID(): string { return this.ARTICLE + this.FIND_BY_ID;}
+    public static get ARTICLE_SAVE(): string { return this.ARTICLE + this.SAVE;}
     
     // TEST
 
@@ -42,6 +48,7 @@ export class StaticUrl {
     //ROUTER
     public static get ROUTER_HOME(): string { return "home";}
     public static get ROUTER_CATEGORY(): string { return "category";}
+    public static get ROUTER_ARTICLE(): string { return "article";}
     public static get ROUTER_LOGIN(): string { return "/login";}
     public static get ROUTER_NEW(): string { return "new";}
     

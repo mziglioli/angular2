@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { ArticleComponent } from './component/article/article.component';
+import { ArticleCreateComponent } from './component/article/article-create/article-create.component';
 import { CategoryComponent } from './component/category/category.component';
 import { CategoryCreateComponent } from './component/category/category-create/category-create.component';
 import { TesteComponent } from './component/teste/teste.component';
@@ -17,7 +18,13 @@ export const router: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'teste', component: TesteComponent , canActivate: [AuthGuard]},
     { path: 'home', component: HomeComponent , canActivate: [AuthGuard]},
-    { path: 'article', component: ArticleComponent , canActivate: [AuthGuard]},
+    { path: 'article', canActivate: [AuthGuard], 
+        children: [
+             { path: '', component: ArticleComponent },
+             { path: 'edit/:id', component: ArticleCreateComponent },         
+             { path: 'new', redirectTo:'new', pathMatch: 'full' },
+             { path: 'new', component: ArticleCreateComponent },         
+    ]},
     { path: 'category', canActivate: [AuthGuard], 
         children: [
              { path: '', component: CategoryComponent },

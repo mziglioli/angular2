@@ -8,22 +8,13 @@
 	<div style="padding-top: 3%;padding-bottom: 3%">
 		<div id="table-size" class="dataTables_length">
 			<label>Show
-				<select name="table-size-select" [(ngModel)]="pageCategory.size" (ngModelChange)="changeSize($event)">
-					<option value="5"  [selected]="pageCategory.size == 5">5</option>
-					<option value="10" [selected]="pageCategory.size == 10">10</option>
-					<option value="20" [selected]="pageCategory.size == 15">20</option>
+				<select name="table-size-select" [(ngModel)]="pageObject.size" (ngModelChange)="changeSize($event)">
+					<option value="5"  [selected]="pageObject.size == 5">5</option>
+					<option value="10" [selected]="pageObject.size == 10">10</option>
+					<option value="20" [selected]="pageObject.size == 15">20</option>
 				</select> entries
 			</label>
 		</div>
-<!-- 		<div id="table-sort" class="dataTables_filter" style="padding-left:3%"> -->
-<!-- 			<label>Sort:  -->
-<!-- 				<select name="table-sort-select" [(ngModel)]="sort" (ngModelChange)="changeSort($event)"> -->
-<!-- 					<option value="id"   [selected]="sort == 'id'">Id</option> -->
-<!-- 					<option value="name" [selected]="sort == 'name'">Name</option> -->
-<!-- 					<option value="icon" [selected]="sort == 'icon'">Icon</option> -->
-<!-- 				</select> -->
-<!-- 			</label> -->
-<!-- 		</div> -->
 		<div id="table-filter" class="dataTables_filter">
 			<label>Search:
 				<input type="text" placeholder="Search" [ngModel]="search" (ngModelChange)="changeSearch($event)">
@@ -33,27 +24,12 @@
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th>
+				<th *ngFor="let h of tableHeader">
 					<div class="col-sm-2" style="padding-left: 0;">
-						<a href="javascript:void(0)" (click)="changeSort('id')">{{ 'label.id' | translate }}</a>
+						<a href="javascript:void(0)" (click)="changeSort(h)">{{ 'label.'+h | translate }}</a>
 					</div>
 					<a href="javascript:void(0)" (click)="changeSortDir()">
-						<i [ngClass]="{hide: sort != 'id'}" class="material-icons app-input-icon">{{sortDir}}</i>
-					</a>
-				</th>
-				<th>
-					<div class="col-sm-2" style="padding-left: 0;">
-						<a href="javascript:void(0)" (click)="changeSort('name')">{{ 'label.name' | translate }}</a>
-					</div>
-					<a href="javascript:void(0)" (click)="changeSortDir()">
-						<i [ngClass]="{hide: sort != 'name'}" class="material-icons app-input-icon hide" style="padding-left: 4%">{{sortDir}}</i>
-					</a>
-				<th>
-					<div class="col-sm-2" style="padding-left: 4;">
-						<a href="javascript:void(0)" (click)="changeSort('icon')">{{ 'label.icon' | translate }}</a>
-					</div>
-					<a href="javascript:void(0)" (click)="changeSortDir()">
-						<i [ngClass]="{hide: sort != 'icon'}" class="material-icons app-input-icon hide" style="padding-left: 4%">{{sortDir}}</i>
+						<i [ngClass]="{hide: sort != h}" class="material-icons app-input-icon" style="padding-left: 4%">{{sortDir}}</i>
 					</a>
 				</th>
 				<th>{{ 'label.edit' | translate }}</th>
@@ -61,7 +37,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr *ngFor="let cat of pageCategory.content">
+			<tr *ngFor="let cat of pageObject.content">
 				<td>{{cat.id}}</td>
 				<td>{{cat.name}}</td>
 				<td>{{cat.icon}}</td>
@@ -80,25 +56,25 @@
 	</table>
 	<div class="dataTables_length">
 		<ul class="dataTables_filter pagination pagination-sm">
-		    <li [ngClass]="{disabled: pageCategory.first}" class="pagination-first page-item">
+		    <li [ngClass]="{disabled: pageObject.first}" class="pagination-first page-item">
 	    		<a class="page-link" href="javascript:void(0)" (click)="change(0)">First</a>
 	    	</li>
-		    <li [ngClass]="{disabled: pageCategory.first}" class="pagination-prev page-item disabled">
-	      		<a class="page-link" href="javascript:void(0)" (click)="change(pageCategory.number-1)">Previous</a>
+		    <li [ngClass]="{disabled: pageObject.first}" class="pagination-prev page-item disabled">
+	      		<a class="page-link" href="javascript:void(0)" (click)="change(pageObject.number-1)">Previous</a>
 	      	</li>
-			<li [ngClass]="{active: item == (pageCategory.number+1)}"  *ngFor="let item of items" class="pagination-page page-item">
+			<li [ngClass]="{active: item == (pageObject.number+1)}"  *ngFor="let item of items" class="pagination-page page-item">
 				<a class="page-link" href="javascript:void(0)" (click)="change(item-1)">{{item}}</a>
 			</li>
-	    	<li [ngClass]="{disabled: pageCategory.last}" class="pagination-next page-item">
-	      		<a class="page-link" href="javascript:void(0)" (click)="change(pageCategory.number+1)">Next</a>
+	    	<li [ngClass]="{disabled: pageObject.last}" class="pagination-next page-item">
+	      		<a class="page-link" href="javascript:void(0)" (click)="change(pageObject.number+1)">Next</a>
 	      	</li>
-	    	<li [ngClass]="{disabled: pageCategory.last}" class="pagination-last page-item">
-	     		<a class="page-link" href="javascript:void(0)" (click)="change(pageCategory.totalPages-1)">Last</a>
+	    	<li [ngClass]="{disabled: pageObject.last}" class="pagination-last page-item">
+	     		<a class="page-link" href="javascript:void(0)" (click)="change(pageObject.totalPages-1)">Last</a>
 	    	</li>
 	  	</ul>
 	</div>
 	<div style="padding-top: 2%" class="dataTables_filter" id="example_info" role="status" aria-live="polite">
-		Showing {{(pageCategory.number * pageCategory.size) + 1}} to {{(pageCategory.number * pageCategory.size) + pageCategory.numberOfElements}} of {{pageCategory.totalElements}} entries
+		Showing {{(pageObject.number * pageObject.size) + 1}} to {{(pageObject.number * pageObject.size) + pageObject.numberOfElements}} of {{pageObject.totalElements}} entries
 	</div>
 </div>
 <router-outlet></router-outlet>

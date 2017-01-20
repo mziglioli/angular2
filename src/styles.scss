@@ -18,3 +18,10 @@ $theme: md-light-theme($primary, $accent, $warn);
 .show{
 	display:block;
 }
+.dataTables_filter {
+    float: right;
+    text-align: right;
+}
+.dataTables_length {
+    float: left;
+}

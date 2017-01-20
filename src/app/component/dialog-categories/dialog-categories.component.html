@@ -1,20 +1,8 @@
-<div class="my-content">
-	<div class="row">
-		<div class="col-md-4">
-			<button md-raised-button color="primary" type="button" [routerLink]="['new']">New</button>
-			<label class="my-title">{{ 'label.articles' | translate }}</label>
-	  	</div>
-	</div>
+<button color="accent" type="button" md-button (click)="dialogRef.close()">
+<i class="material-icons" >keyboard_backspace</i>{{ 'label.cancel' | translate }}
+</button>
+<button color="primary" type="button" md-raised-button (click)="saveAndClose()">{{ 'label.ok' | translate }}</button>
 	<div style="padding-top: 3%;padding-bottom: 3%">
-		<div id="table-size" class="dataTables_length">
-			<label>Show
-				<select name="table-size-select" [(ngModel)]="pageObject.size" (ngModelChange)="changeSize($event)">
-					<option value="5"  [selected]="pageObject.size == 5">5</option>
-					<option value="10" [selected]="pageObject.size == 10">10</option>
-					<option value="20" [selected]="pageObject.size == 15">20</option>
-				</select> entries
-			</label>
-		</div>
 		<div id="table-filter" class="dataTables_filter">
 			<label>Search:
 				<input type="text" placeholder="Search" [ngModel]="search" (ngModelChange)="changeSearch($event)">
@@ -23,41 +11,35 @@
 	</div>
 	<table class="table table-hover">
 		<thead>
+			<tr>Select</tr>
 			<tr>
 				<th *ngFor="let h of tableHeader">
-					<div class="col-sm-6" style="padding-left: 0;">
-						<a href="javascript:void(0)" (click)="changeSort(h)"  mdTooltipPosition="above" mdTooltip="{{'label.order.by' | translate:{value: h} }}">{{h}}</a>
+					<div class="col-sm-2" style="padding-left: 0;">
+						<a href="javascript:void(0)" (click)="changeSort(h)">{{ 'label.'+h | translate }}</a>
 					</div>
-					<div class="col-sm-2" style="padding-left: 4%;">
-						<a href="javascript:void(0)" (click)="changeSortDir()">
-							<i [ngClass]="{hide: sort != h}" class="material-icons app-input-icon">{{sortDir}}</i>
-						</a>
-					</div>
+					<a href="javascript:void(0)" (click)="changeSortDir()">
+						<i [ngClass]="{hide: sort != h}" class="material-icons app-input-icon" style="padding-left: 4%">{{sortDir}}</i>
+					</a>
 				</th>
-				<th>{{ 'label.categories' | translate }}</th>
 				<th>{{ 'label.edit' | translate }}</th>
 				<th>{{ 'label.delete' | translate }}</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr *ngFor="let obj of pageObject.content">
-				<td>{{obj.id}}</td>
-				<td>{{obj.title}}</td>
-				<td>{{obj.answer}}</td>
-				<td>{{obj.action}}</td>
-				<td>{{obj.actionName}}</td>
-				<td (click)="prepareChangeCategories(obj)" mdTooltipPosition="below" mdTooltip="{{'label.manage.categories' | translate}}" style="cursor: pointer;">
-					<p *ngFor="let c of obj.categories">
-						{{c.name}}
-					</p>
-				</td>
+			<tr *ngFor="let cat of pageObject.content">
 				<td>
-					<a [routerLink]="['edit', obj.id]" mdTooltip="{{'label.alter.object' | translate:{value: obj.title} }}">
+					<md-checkbox class="example-margin" [checked]="isChecked(cat.id)" (change)="markCategory(cat.id)"></md-checkbox>
+				</td>
+				<td>{{cat.id}}</td>
+				<td>{{cat.name}}</td>
+				<td>{{cat.icon}}</td>
+				<td>
+					<a [routerLink]="['edit', cat.id]">
 	          			<i  class="material-icons app-input-icon">edit</i>&nbsp;
 					</a>
 				</td>
 				<td>
-					<a (click)="openDialog(obj)" href="javascript:void(0)" mdTooltip="{{'label.delete.object' | translate:{value: obj.title} }}">
+					<a (click)="openDialog(cat)" href="javascript:void(0)"> 
 	          			<i  class="material-icons app-input-icon">delete</i>&nbsp;
 					</a>
 				</td>
@@ -86,5 +68,4 @@
 	<div style="padding-top: 2%" class="dataTables_filter" id="example_info" role="status" aria-live="polite">
 		Showing {{(pageObject.number * pageObject.size) + 1}} to {{(pageObject.number * pageObject.size) + pageObject.numberOfElements}} of {{pageObject.totalElements}} entries
 	</div>
-</div>
 <router-outlet></router-outlet>

@@ -1,0 +1,60 @@
+<div class="my-content">
+
+<a [routerLink]="['/article']" title="{{ 'label.back' | translate }}">
+	<i class="material-icons" >keyboard_backspace</i>
+	{{ 'label.back' | translate }}
+</a>
+
+<md-card class="app-input-section" >
+	<md-card-header color="primary">
+    	<md-card-title>
+    		<label class="my-title">{{title}}</label>
+    	</md-card-title>
+  	</md-card-header>
+	<form name="form" (ngSubmit)="f.form.valid && submit()" #f="ngForm" novalidate>
+		<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !articleTitle.valid }">
+	    	<md-input-container style="width: 100%">
+	    		<input md-input placeholder="{{ 'label.article.title' | translate }}" maxlength="250" type="text" name="title" [(ngModel)]="article.title" #articleTitle="ngModel" required>
+        		<span md-prefix>
+          			<i class="material-icons app-input-icon">add_circle</i>&nbsp;
+        		</span>
+      		</md-input-container>
+            <div role="alert" md-label *ngIf="f.submitted && !articleTitle.valid" class="form-error" >{{ 'error.required.title' | translate }}</div>
+        </div>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !articleAnswer.valid }">
+      		<md-input-container style="width: 100%">
+	    		<input md-input placeholder="{{ 'label.answer' | translate }}" maxlength="250" type="text" name="answwer" [(ngModel)]="article.answer" #articleAnswer="ngModel" required> 
+	          	<span md-prefix>
+          			<i class="material-icons app-input-icon">accessibility</i>&nbsp;
+        		</span>
+      		</md-input-container>
+			<div *ngIf="f.submitted && !articleAnswer.valid" class="form-error">{{ 'error.required.answer' | translate }}</div>
+        </div>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !articleAction.valid }">
+      		<md-input-container style="width: 100%">
+	    		<input md-input placeholder="{{ 'label.action' | translate }}" maxlength="250" type="text" name="action" [(ngModel)]="article.action" #articleAction="ngModel" required> 
+	          	<span md-prefix>
+          			<i class="material-icons app-input-icon">accessibility</i>&nbsp;
+        		</span>
+      		</md-input-container>
+			<div *ngIf="f.submitted && !articleAction.valid" class="form-error">{{ 'error.required.action' | translate }}</div>
+        </div>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !actionName.valid }">
+      		<md-input-container style="width: 100%">
+	    		<input md-input placeholder="{{ 'label.actionName' | translate }}" maxlength="250" type="text" name="actionName" [(ngModel)]="article.actionName" #actionName="ngModel" required> 
+	          	<span md-prefix>
+          			<i class="material-icons app-input-icon">accessibility</i>&nbsp;
+        		</span>
+      		</md-input-container>
+			<div *ngIf="f.submitted && !actionName.valid" class="form-error">{{ 'error.required.actionName' | translate }}</div>
+        </div>
+		<div class="form-group">
+			<button md-raised-button color="accent" type="reset">{{ 'label.clear' | translate }}</button>
+			<button md-raised-button color="primary" type="submit">{{action}}</button> 
+		</div>
+        <div *ngIf="error" class="form-error" style="width: 100%">
+		    	{{error}}
+        </div>
+    </form>  
+</md-card>
+</div>

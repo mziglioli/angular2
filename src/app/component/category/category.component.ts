@@ -23,12 +23,13 @@ export class CategoryComponent implements OnInit {
     items: number[];
     actualPage: number = 1;
     categories: Category[];
-    pageCategory: PageCategory;
+    pageObject: PageCategory;
     errorMessage: string;
     dialogResult: any;
     search: string;
     sort: string;
     sortDir: string;
+    tableHeader: string[];
 
     constructor( private service: CategoryService,
         private dialog: DialogsConfirmService,
@@ -40,9 +41,10 @@ export class CategoryComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.pageCategory = { content: [], first: true, last: false, number: 0, numberOfElements: 5, size: 5, sort:null, totalElements: 5, totalPages: 0 };
+        this.pageObject = { content: [], first: true, last: false, number: 0, numberOfElements: 5, size: 5, sort:null, totalElements: 5, totalPages: 0 };
         this.search = '';
         this.change(0);
+        this.tableHeader = ['id','name','icon'];
         this.sortDir = "expand_more";
         var t = this.snackbarProvider.title;
         if ( t != null && t != "null" ) {
@@ -60,7 +62,7 @@ export class CategoryComponent implements OnInit {
 
     createRange() {
         this.items = [];
-        for ( var i = 1; i <= this.pageCategory.totalPages; i++ ) {
+        for ( var i = 1; i <= this.pageObject.totalPages; i++ ) {
             this.items.push( i );
         }
     }
@@ -98,10 +100,10 @@ export class CategoryComponent implements OnInit {
         if(this.sortDir == "expand_less"){
             direction = ',desc';
         }
-        this.service.getPageCategories( this.search, thisPage, this.pageCategory.size, this.sort+direction)
+        this.service.getPageCategories( this.search, thisPage, this.pageObject.size, this.sort+direction)
             .subscribe(
             res => {
-                this.pageCategory = res;
+                this.pageObject = res;
                 this.createRange();
             },
             error => this.errorMessage = <any>error
